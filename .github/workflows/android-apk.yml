@@ -1,0 +1,43 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "RPGMakerDecrypter.Android/**"
+      - ".github/workflows/android-apk.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Install Android workload
+        run: dotnet workload install android
+
+      - name: Build APK
+        run: >
+          dotnet build RPGMakerDecrypter.Android/RPGMakerDecrypter.Android.csproj
+          -c Release -p:AndroidPackageFormat=apk
+
+      - name: Collect APK
+        run: |
+          mkdir -p out
+          find RPGMakerDecrypter.Android/bin/Release -name "*-Signed.apk" -exec cp {} out/ \;
+          ls -la out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: RPGMakerDecrypter-apk
+          path: out/*.apk
+          if-no-files-found: error
