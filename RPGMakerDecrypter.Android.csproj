@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>24</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>RpgDecryptApp</RootNamespace>
+    <AssemblyName>RPGMakerDecrypterAndroid</AssemblyName>
+    <ApplicationId>com.uuksu.rpgmakerdecrypter</ApplicationId>
+    <ApplicationTitle>RPG Maker Decrypter</ApplicationTitle>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <RuntimeIdentifiers>android-arm64;android-arm</RuntimeIdentifiers>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RPGMakerDecrypter.Common\RPGMakerDecrypter.Common.csproj" />
+    <ProjectReference Include="..\RPGMakerDecrypter.RGSSAD\RPGMakerDecrypter.RGSSAD.csproj" />
+  </ItemGroup>
+</Project>
